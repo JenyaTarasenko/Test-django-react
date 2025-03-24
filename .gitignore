@@ -1,0 +1,38 @@
+# Игнорировать виртуальные окружения
+venv/
+
+# Игнорировать файлы Python, скомпилированные байт-коды и кэш
+__pycache__/
+*.pyc
+
+# Игнорировать конфигурационные файлы IDE
+.idea/
+.vscode/
+
+# Игнорировать журнальные файлы
+*.log
+
+# Игнорировать файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# Игнорировать временные файлы
+*.swp
+#  Node.js (React)
+node_modules/
+npm-debug.log
+yarn-error.log
+.yarn/
+.yarnrc
+.yarn.lock
+package-lock.json
+
+# React Build
+/build/
+dist/
+coverage/
+
+# IDE файлы (если работаешь в WebStorm или VS Code)
+*.iml
+.sublime-workspace
+.sublime-project

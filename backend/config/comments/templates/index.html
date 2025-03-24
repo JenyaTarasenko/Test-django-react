@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Комментарии</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h1>Комментарии</h1>
+
+    <!-- Форма добавления нового комментария -->
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.user_name.label_tag }} {{ form.user_name }}
+        </div>
+        <div class="mb-3">
+            {{ form.email.label_tag }} {{ form.email }}
+        </div>
+        <div class="mb-3">
+            {{ form.home_page.label_tag }} {{ form.home_page }}
+        </div>
+        <div class="mb-3">
+            {{ form.text.label_tag }} {{ form.text }}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+    </form>
+
+    <hr>
+
+    <!-- Вывод комментариев -->
+    {% for comment in comments %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ comment.user_name }}</h5>
+                <h6 class="card-subtitle text-muted">{{ comment.email }}</h6>
+                {% if comment.home_page %}
+                    <p><a href="{{ comment.home_page }}" target="_blank">Домашняя страница</a></p>
+                {% endif %}
+                <p class="card-text">{{ comment.text }}</p>
+                <small class="text-muted">Дата: {{ comment.created_at }}</small>
+
+                <!-- Форма ответа на комментарий -->
+                <form method="post" class="mt-2">
+                    {% csrf_token %}
+                    {{ form.user_name.as_hidden }}
+                    {{ form.email.as_hidden }}
+                    {{ form.home_page.as_hidden }}
+                    {{ form.text.as_hidden }}
+                    <input type="hidden" name="parent" value="{{ comment.id }}">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Ответить</button>
+                </form>
+
+                <!-- Вывод ответов -->
+                {% if comment.replies.all %}
+                    <div class="mt-3 ps-4 border-start">
+                        <h6>Ответы:</h6>
+                        {% for reply in comment.replies.all %}
+                            <div class="alert alert-secondary">
+                                <strong>{{ reply.user_name }}</strong>: {{ reply.text }}
+                                <br>
+                                <small class="text-muted">Дата: {{ reply.created_at }}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>Комментариев пока нет.</p>
+    {% endfor %}
+
+</body>
+</html>
