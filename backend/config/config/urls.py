@@ -8,7 +8,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('comments.urls', namespace='comments')),
+    path('api/', include('comments.urls', namespace='comments')),
     path('captcha/', include('captcha.urls')),
 ]
 
