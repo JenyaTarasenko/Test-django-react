@@ -32,7 +32,7 @@ const AddComment = ({ onCommentAdded }) => {
 
     return (
         <form onSubmit={handleSubmit} style={{ margin: '20px 0' }}>
-            <h3>Добавить комментарий</h3>
+            <h3 class="pb-5">Добавить ваш комментарий в общий чат</h3>
 
             <div style={{ marginBottom: '10px' }}>
                 <input
@@ -42,7 +42,7 @@ const AddComment = ({ onCommentAdded }) => {
                     value={formData.user_name}
                     onChange={handleChange}
                     required
-                    style={{ width: '100%', padding: '8px' }}
+                    style={{ width: '400px', padding: '8px', color: 'aqua', background: '#b3dae5', border: 'none', borderRadius:'20px', fontSize:'12px'}}
                 />
             </div>
 
@@ -54,7 +54,7 @@ const AddComment = ({ onCommentAdded }) => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    style={{ width: '100%', padding: '8px' }}
+                    style={{ width: '400px', padding: '8px',  background:'#b3dae5', border: 'none', borderRadius:'20px', fontSize:'12px'}}
                 />
             </div>
 
@@ -65,7 +65,7 @@ const AddComment = ({ onCommentAdded }) => {
                     placeholder="Сайт (необязательно)"
                     value={formData.home_page}
                     onChange={handleChange}
-                    style={{ width: '100%', padding: '8px' }}
+                    style={{ width: '400px', padding: '8px', background: '#b3dae5', border: 'none', borderRadius:'20px', fontSize:'12px'}}
                 />
             </div>
 
@@ -76,11 +76,11 @@ const AddComment = ({ onCommentAdded }) => {
                     value={formData.text}
                     onChange={handleChange}
                     required
-                    style={{ width: '100%', padding: '8px', minHeight: '100px' }}
+                    style={{ width: '400px', padding: '8px', minHeight: '100px', background: '#b3dae5', border: 'none', borderRadius:'20px', fontSize:'12px'}}
                 />
             </div>
 
-            <button type="submit" style={{ padding: '8px 15px', background: '#4CAF50', color: 'white', border: 'none' }}>
+            <button type="submit" style={{ padding: '8px 15px', background: '#4CAF50', color: 'white', border: 'none', borderRadius:'10px', fontSize:'12px' }}>
                 Отправить
             </button>
         </form>
