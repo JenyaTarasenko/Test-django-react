@@ -8,6 +8,8 @@ import line2 from '../../image/line-style2.png';
 import line3 from '../../image/line-style3.png';
 import line4 from '../../image/line-style4.png';
 import ReplyForm from '../replyform/replyForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 
@@ -68,128 +70,86 @@ const Comments  = () =>{
     if(isLoading) return <div>..загрузка</div>;
     if (error) return <div>{error}</div>;
 
+
     return (
-        <div className="container mt-4">
-          <h1 className="mt-3">Комментарии ({comments.length})</h1>
-          
-          {comments.length === 0 ? (
-            <div className="alert alert-info">Пока нет комментариев</div>
-          ) : (
-            <div>
-              {comments.map(comment => (
-                <section key={comment.id} className="comment-section mb-4">
-                  <div className="comment">
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-md-12 mt-3">
-                          <div className="comment-pannel d-flex flex-row justify-content-between align-items-center">
-                            <div className="comment-pannel-column-left d-flex flex-row">
-                              <div className="comment-pannel-column-body d-flex flex-row align-items-center gap-3">
-                                    <div className="comment-pannel-avatar">
-                                        <img 
-                                            src={avatar} 
-                                            alt="Аватар" 
-                                            className="rounded-circle"
-                                            width="40"
-                                            height="40"
-                                        />
-                                    </div>
-                                <div className="comment-pannel-avatar-name">
-                                  <span>{comment.user_name}</span>
-                                 </div>
-                                <div className="comment-pannel-avatar-time-on">
-                                  <span>
-                                    {new Date(comment.created_at).toLocaleDateString()} 
-                                  </span>
-                                </div>
-                                <div className="comment-pannel-avatar-time-on">
-                                    <span>
-                                            {new Date(comment.created_at).toLocaleTimeString([], { 
-                                                hour: '2-digit', 
-                                                minute: '2-digit' 
-                                            })}
-                                    </span>
-                                </div>
-                                
-                                
-                                <div className="comment-pannel-column-body-style d-flex flex-row align-items-center gap-2">
-                                  <div className="comment-pannel-line">
-                                    <img 
-                                      src={line1} 
-                                      alt="Иконка"
-                                    />
-                                  </div>
-                                  <div className="comment-pannel-line">
-                                    <img 
-                                      src={line4}
-                                      alt="Иконка"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-      
-                            <div className="comment-pannel-column-right">
-                              <div className="comment-pannel-column-body-item d-flex flex-row align-items-center gap-3">
-                                <div className="comment-pannel-line">
-                                  <img 
-                                    src={line2} 
-                                    alt="Иконка"
-                                  />
-                                </div>
-                                <div className="comment-pannel-avatar-time-on">
-                                  <span>{comment.id}</span> {/* Можно заменить на comment.likes или аналогичное поле */}
-                                </div>
-                                <div className="comment-pannel-line">
-                                  <img 
-                                    src={line2} 
-                                    alt="Иконка"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+      <div className="container mt-4">
+        <h1 className="mt-3">Комментарии ({comments.length})</h1>
+        
+        {comments.length === 0 ? (
+          <div className="alert alert-info">Пока нет комментариев</div>
+        ) : (
+          <div className="accordion d-flex flex-column gap-4 " id="accordionExample">
+            {comments.map(comment => (
+              <div key={comment.id} className="accordion-item ">
+                <h2 className="accordion-header" id={`heading-${comment.id}`}>
+                  <button 
+                    className="accordion-button" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target={`#collapse-${comment.id}`} 
+                    aria-expanded="true" 
+                    aria-controls={`collapse-${comment.id}`}
+                  >
+                    <div className="container-column-panel d-flex flex-row justify-content-center align-items-center gap-4">
+                      <div className="img-strong">
+                        <img src={avatar} className="avatar" alt="Аватар"/>
+                      </div>
+                      <div className="img-name">
+                        <h6>{comment.user_name.length >10
+                            ?comment.user_name.slice(0,5)  + '...' 
+                            : comment.user_name}</h6>
+                      </div>
+                      <div className="img-date">
+                        <h6>{new Date(comment.created_at).toLocaleDateString()}</h6>
+                      </div>
+                      <div className="img-date">
+                        <h6>
+                          {new Date(comment.created_at).toLocaleTimeString([], { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </h6>
                       </div>
                     </div>
+                    <div className="container-column-panel-left d-flex flex-row justify-content-center align-items-center gap-4">
+                      <div className="img-strong">
+                        <img src={line1} className="img-avatar" alt="Линия 1"/>
+                      </div>
+                      <div className="img-strong">
+                        <img src={line2} className="img-avatar" alt="Линия 2"/>
+                      </div>
+                      <div className="img-strong">
+                        <img src={line3}  className="img-avatar" alt="Линия 3"/>
+                      </div>
+                    </div>
+                  </button>
+                </h2>
+                <div 
+                  id={`collapse-${comment.id}`} 
+                  className="accordion-collapse collapse show" 
+                  aria-labelledby={`heading-${comment.id}`} 
+                  // data-bs-parent="#accordionExample"
+                >
+                  <div className="accordion-body">
+                    {comment.text}
                   </div>
-                  <div>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-12 text-section">
-                          <p>{comment.text}</p>
-                        </div>
-                      </div>
-                    </div>
-                        {/* {replyTo === comment.id && (
-                            <ReplyForm
-                                parentId={comment.id}
-                                onClose={() => setReplyTo(null)}
-                                onSubmit={handleReplySubmit}
-                            />
-                        )}         */}
-                        <ReplyForm 
-            
-                            parentId={comment.id}
-                            onClose={() => setReplyTo(null)}
-                            onSubmit={handleReplySubmit} // убедитесь, что это правильная функция
-                        />
-                    </div>
-                </section>
-              ))}
-            </div>
-          )}
-          <AddComment onCommentAdded={handleCommentAdded} />
-        </div>
-    );
-
-
-
-           
-
+                </div>
+               
+              </div>
+              
+            ))}
+          </div>
+          
+        )}
+         <AddComment onCommentAdded={handleCommentAdded} />
+      </div>
       
-
+    );
+   
+          
 };
 
 export default Comments;
 
+          
+ 
