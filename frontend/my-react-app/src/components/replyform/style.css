@@ -1,0 +1,29 @@
+.secondary-form {
+    background-color: transparent;
+    border: 1px solid;
+    color: black;
+    border-radius: 20px;
+}
+.secondary-form:hover {
+    
+    color: rgb(76, 70, 241); /* Белый текст при наведении */
+}
+
+.secondary-form:active {
+    background-color: darkgray; /* Темно-серый фон при нажатии */
+    color: white; /* Белый текст при нажатии */
+}  
+.reply-form  {
+    margin-left: 550px;
+    margin-top: 30px;
+}
+
+.reaply-text {
+    padding: 10px 15px; /* Внутренние отступы */
+    font-size: 16px; /* Размер шрифта */
+    border: 2px solid #d5d5d5; /* Серая граница */
+    border-radius: 10px; /* Скругленные углы */
+    background-color: #f9f9f9; /* Цвет фона */
+    color: #333; /* Цвет текста */
+    transition: all 0.3s ease; 
+}

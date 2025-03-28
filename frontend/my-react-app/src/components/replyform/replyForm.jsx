@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import './style.css';
 
 
 const ReplyForm = ({ parentId, onClose, onSubmit }) => {
@@ -8,6 +9,7 @@ const ReplyForm = ({ parentId, onClose, onSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (replyText.trim()) {
+            console.log("Отправить ответ", parentId)
             onSubmit(replyText, parentId); // Передаем данные в onSubmit
             setReplyText(''); // Очищаем поле ввода после отправки
             onClose(); // Закрываем форму
@@ -15,15 +17,18 @@ const ReplyForm = ({ parentId, onClose, onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <textarea
+        <form onSubmit={handleSubmit} className="reply-form d-flex justify-content-center align-items-center flex-column gap-2">
+            <textarea  class="reaply-text"
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Ваш ответ..."
                 required
             />
-            <button type="submit">Отправить</button>
-            <button type="button" onClick={onClose}>Закрыть</button>
+
+            <div className="form-column d-flex justify-content-center align-items-center gap-3">
+                <button className="secondary-form" type="submit">Отправить</button>
+                <button className="secondary-form" type="button" onClick={onClose}>Закрыть</button>
+            </div>
         </form>
     );
 };

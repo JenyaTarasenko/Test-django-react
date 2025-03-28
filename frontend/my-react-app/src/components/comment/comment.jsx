@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddComment from '../addcomment/addcomment';
 import './style.css';
+import add from '../../image/add.png';
 import line1 from '../../image/line-style1.png';
 import avatar from '../../image/avatar.png';
 import line2 from '../../image/line-style2.png';
@@ -116,6 +117,11 @@ const Comments  = () =>{
                         <img src={line1} className="img-avatar" alt="Линия 1"/>
                       </div>
                       <div className="img-strong">
+                          <button onClick={() => setReplyTo(comment.id)} className="btn-reply">
+                            <img src={add} className="img-avatar" alt="Ответить" />
+                          </button>
+                      </div>
+                      <div className="img-strong">
                         <img src={line2} className="img-avatar" alt="Линия 2"/>
                       </div>
                       <div className="img-strong">
@@ -132,14 +138,25 @@ const Comments  = () =>{
                 >
                   <div className="accordion-body">
                     {comment.text}
+                      {/* Кнопка для ответа */}
+                    {/* <button onClick={() => setReplyTo(comment.id)}>Ответить</button> */}
+                    {console.log("replyTo:", replyTo, "comment.id:", comment.id)}
+                    {replyTo === comment.id && (
+                        <ReplyForm
+                            parentId={comment.id}
+                            onSubmit={(replyText, parentId) => {
+                                console.log(`Ответ на комментарий ${parentId}:`, replyText);
+                                handleReplySubmit(replyText, parentId);
+                            }}
+                            onClose={() => setReplyTo(null)}
+                        />
+                    )}
                   </div>
                 </div>
-               
-              </div>
-              
+            
+              </div> 
             ))}
           </div>
-          
         )}
          <AddComment onCommentAdded={handleCommentAdded} />
       </div>
