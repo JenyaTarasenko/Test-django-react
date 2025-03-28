@@ -10,9 +10,9 @@ const ReplyForm = ({ parentId, onClose, onSubmit }) => {
         e.preventDefault();
         if (replyText.trim()) {
             console.log("Отправить ответ", parentId)
-            onSubmit(replyText, parentId); // Передаем данные в onSubmit
-            setReplyText(''); // Очищаем поле ввода после отправки
-            onClose(); // Закрываем форму
+            onSubmit(replyText, parentId); 
+            setReplyText(''); 
+            onClose();
         }
     };
 
